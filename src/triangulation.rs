@@ -91,7 +91,7 @@ pub fn with_ellipse_tri_list<F>(
     stream_polygon_tri_list(m, || {
         if i >= n { return None; }
 
-        let angle = i as Scalar / n as Scalar * <f64 as Radians>::_360();
+        let angle = i as Scalar / n as Scalar * <f32 as Radians>::_360();
         i += 1;
         Some([cx + angle.cos() * cw, cy + angle.sin() * ch])
     }, f);
@@ -134,19 +134,19 @@ pub fn with_round_border_line_tri_list<F>(
                 // This requires an angle offset since
                 // the other end of line is the first half circle.
                 let angle = (j - resolution_cap) as Scalar
-                    / (resolution_cap - 1) as Scalar * <f64 as Radians>::_180()
-                    + <f64 as Radians>::_180();
+                    / (resolution_cap - 1) as Scalar * <f32 as Radians>::_180()
+                    + <f32 as Radians>::_180();
                 // Rotate 90 degrees since the line is horizontal.
-                let angle = angle +  <f64 as Radians>::_90();
+                let angle = angle +  <f32 as Radians>::_90();
                 Some([w + angle.cos() * radius, angle.sin() * radius])
             },
             j => {
                 // Compute the angle to match start and end
                 // point of half circle.
                 let angle = j as Scalar
-                    / (resolution_cap - 1) as Scalar * <f64 as Radians>::_180();
+                    / (resolution_cap - 1) as Scalar * <f32 as Radians>::_180();
                 // Rotate 90 degrees since the line is horizontal.
-                let angle = angle + <f64 as Radians>::_90();
+                let angle = angle + <f32 as Radians>::_90();
                 Some([angle.cos() * radius, angle.sin() * radius])
             },
         }
@@ -186,8 +186,8 @@ pub fn with_round_rectangle_tri_list<F>(
                 // This requires an angle offset since this
                 // is the last quarter.
                 let angle = (j - resolution_corner * 3) as Scalar
-                    / (resolution_corner - 1) as Scalar * <f64 as Radians>::_90()
-                    + 3.0 * <f64 as Radians>::_90();
+                    / (resolution_corner - 1) as Scalar * <f32 as Radians>::_90()
+                    + 3.0 * <f32 as Radians>::_90();
                 // Set center of the circle to the last corner.
                 let (cx, cy) = (x + w - radius, y + radius);
                 Some([cx + angle.cos() * radius, cy + angle.sin() * radius])
@@ -198,8 +198,8 @@ pub fn with_round_rectangle_tri_list<F>(
                 // This requires an angle offset since
                 // this is the second last quarter.
                 let angle = (j - resolution_corner * 2) as Scalar
-                    / (resolution_corner - 1) as Scalar * <f64 as Radians>::_90()
-                    + <f64 as Radians>::_180();
+                    / (resolution_corner - 1) as Scalar * <f32 as Radians>::_90()
+                    + <f32 as Radians>::_180();
                 // Set center of the circle to the second last corner.
                 let (cx, cy) = (x + radius, y + radius);
                 Some([cx + angle.cos() * radius, cy + angle.sin() * radius])
@@ -210,8 +210,8 @@ pub fn with_round_rectangle_tri_list<F>(
                 // This requires an angle offset since
                 // this is the second quarter.
                 let angle = (j - resolution_corner) as Scalar
-                    / (resolution_corner - 1) as Scalar * <f64 as Radians>::_90()
-                    + <f64 as Radians>::_90();
+                    / (resolution_corner - 1) as Scalar * <f32 as Radians>::_90()
+                    + <f32 as Radians>::_90();
                 // Set center of the circle to the second corner.
                 let (cx, cy) = (x + radius, y + h - radius);
                 Some([cx + angle.cos() * radius, cy + angle.sin() * radius])
@@ -221,7 +221,7 @@ pub fn with_round_rectangle_tri_list<F>(
                 // point of quarter circle.
                 let angle = j as Scalar
                     / (resolution_corner - 1) as Scalar
-                    * <f64 as Radians>::_90();
+                    * <f32 as Radians>::_90();
                 // Set center of the circle to the first corner.
                 let (cx, cy) = (x + w - radius, y + h - radius);
                 Some([cx + angle.cos() * radius, cy + angle.sin() * radius])
@@ -315,7 +315,7 @@ pub fn with_ellipse_border_tri_list<F>(
     stream_quad_tri_list(m, || {
         if i > n { return None; }
 
-        let angle = i as Scalar / n as Scalar * <f64 as Radians>::_360();
+        let angle = i as Scalar / n as Scalar * <f32 as Radians>::_360();
         let cos = angle.cos();
         let sin = angle.sin();
         i += 1;
@@ -365,8 +365,8 @@ pub fn with_round_rectangle_border_tri_list<F>(
                 // This requires an angle offset since this
                 // is the last quarter.
                 let angle = (j - resolution_corner * 3) as Scalar
-                    / (resolution_corner - 1) as Scalar * <f64 as Radians>::_90()
-                    + 3.0 * <f64 as Radians>::_90();
+                    / (resolution_corner - 1) as Scalar * <f32 as Radians>::_90()
+                    + 3.0 * <f32 as Radians>::_90();
                 // Set center of the circle to the last corner.
                 let (cx, cy) = (x + w - radius, y + radius);
                 let cos = angle.cos();
@@ -380,8 +380,8 @@ pub fn with_round_rectangle_border_tri_list<F>(
                 // This requires an angle offset since
                 // this is the second last quarter.
                 let angle = (j - resolution_corner * 2) as Scalar
-                    / (resolution_corner - 1) as Scalar * <f64 as Radians>::_90()
-                    + <f64 as Radians>::_180();
+                    / (resolution_corner - 1) as Scalar * <f32 as Radians>::_90()
+                    + <f32 as Radians>::_180();
                 // Set center of the circle to the second last corner.
                 let (cx, cy) = (x + radius, y + radius);
                 let cos = angle.cos();
@@ -395,8 +395,8 @@ pub fn with_round_rectangle_border_tri_list<F>(
                 // This requires an angle offset since
                 // this is the second quarter.
                 let angle = (j - resolution_corner) as Scalar
-                    / (resolution_corner - 1) as Scalar * <f64 as Radians>::_90()
-                    + <f64 as Radians>::_90();
+                    / (resolution_corner - 1) as Scalar * <f32 as Radians>::_90()
+                    + <f32 as Radians>::_90();
                 // Set center of the circle to the second corner.
                 let (cx, cy) = (x + radius, y + h - radius);
                 let cos = angle.cos();
@@ -409,7 +409,7 @@ pub fn with_round_rectangle_border_tri_list<F>(
                 // point of quarter circle.
                 let angle = j as Scalar
                     / (resolution_corner - 1) as Scalar
-                    * <f64 as Radians>::_90();
+                    * <f32 as Radians>::_90();
                 // Set center of the circle to the first corner.
                 let (cx, cy) = (x + w - radius, y + h - radius);
                 let cos = angle.cos();

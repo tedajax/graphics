@@ -27,7 +27,7 @@ use types::{
 use modular_index::previous;
 
 /// The type used for scalars.
-pub type Scalar = f64;
+pub type Scalar = f32;
 
 /// The type used for matrices.
 pub type Matrix2d = vecmath_lib::Matrix2x3<Scalar>;
